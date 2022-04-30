@@ -26,16 +26,16 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/res_name"
-                android:text="#61, Block 3"
+                android:id="@+id/intro"
+                android:text="Welcome to Coola Coola"
                 android:textColor="@color/white"
-                android:textSize="24sp"/>
+                android:textSize="20sp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/res_location"
-                android:text="Ole Dume rd, Kiliimani"
+                android:id="@+id/user_name"
+                android:text="Sheldon"
                 android:textSize="20sp"
                 android:textColor="@color/white"/>
 
@@ -60,37 +60,40 @@
     </LinearLayout>
 
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:id="@+id/search_res"
-            android:layout_below="@id/header"
-            android:layout_margin="15dp"
-            android:padding="12dp"
-            android:background="@drawable/et_bg"
-            android:hint="Search restaurants"
-            android:drawableRight="@drawable/ic_search"
-            android:textColorHint="@color/white"
-            android:textColor="@color/white" />
+    <EditText
+        android:id="@+id/search_res"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_below="@id/header"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/et_bg"
+        android:drawableRight="@drawable/ic_search"
+        android:hint="Search recipes"
+        android:padding="12dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white" />
 
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/food_cat_recycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/search_res"
-        android:layout_marginTop="8dp"
-        android:id="@+id/food_recycler"/>
+        android:layout_marginTop="8dp"/>
 
     <TextView
+        android:id="@+id/txt_dish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/txt_dish"
-        android:text="our dishes"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:layout_marginTop="16dp"
+        android:layout_below="@id/food_cat_recycler"
         android:layout_marginStart="12dp"
-        android:layout_below="@id/food_recycler"/>
+        android:layout_marginTop="16dp"
+        android:text="Recipes"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
@@ -98,6 +101,6 @@
         android:id="@+id/best_recycler"
         android:layout_below="@id/txt_dish"
         android:layout_marginTop="8dp"
-        tools:listitem="@layout/best_item_layout"/>
+        tools:listitem="@layout/recipe_item_layout"/>
 
 </RelativeLayout>

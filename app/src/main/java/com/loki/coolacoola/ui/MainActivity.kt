@@ -2,32 +2,34 @@ package com.loki.coolacoola.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.loki.coolacoola.R
-import com.loki.coolacoola.adapters.FoodAdapter
+import com.loki.coolacoola.adapters.RecipeCategoryAdapter
+import com.loki.coolacoola.databinding.ActivityMainBinding
 import com.loki.coolacoola.models.Food
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var foodAdapter: FoodAdapter
-    private lateinit var foodRecycler: RecyclerView
-    private var layoutManager: RecyclerView.LayoutManager? = null
-    lateinit var  food: Array<Food>
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var categoryAdapter: RecipeCategoryAdapter
+    private lateinit var categoryRecycler : RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        foodRecycler = findViewById(R.id.food_recycler)
+        categoryRecycler = binding.foodCatRecycler
+        categoryRecycler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
-        food = arrayOf(Food("mango", R.drawable.test), Food("githeri", R.drawable.test ))
 
+        val categories : List<String> = listOf("Breakfast", "Lunch", "Dinner")
 
-        foodAdapter = FoodAdapter(food)
-        layoutManager = LinearLayoutManager(this)
-        foodRecycler.layoutManager = layoutManager
-        foodRecycler.adapter = foodAdapter
+        categoryAdapter = RecipeCategoryAdapter(categories)
+        categoryRecycler.adapter = categoryAdapter
+
     }
 
 

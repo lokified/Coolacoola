@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.loki.coolacoola.R
 import com.loki.coolacoola.adapters.IngredientAdapter
+import com.loki.coolacoola.adapters.InstructionAdapter
 import com.loki.coolacoola.models.Ingredients
 import com.loki.coolacoola.models.RecipeInfo
 import com.loki.coolacoola.network.ApiUtil
@@ -26,7 +28,8 @@ class RecipeDetailActivity : AppCompatActivity() {
     private lateinit var ingredientRecycler : RecyclerView
     private lateinit var ingredientAdapter : IngredientAdapter
 
-    private lateinit var mInstruction : TextView
+    private lateinit var  instAdapter : InstructionAdapter
+
     private lateinit var mReady : TextView
     private lateinit var mServing : TextView
     private lateinit var mSource : TextView
@@ -43,7 +46,6 @@ class RecipeDetailActivity : AppCompatActivity() {
         val mImage : ImageView = findViewById(R.id.recipe_det_img)
         val mTitle : TextView = findViewById(R.id.recipe_det_title)
 
-        mInstruction = findViewById(R.id.recipe_det_instr)
         mReady = findViewById(R.id.recipe_det_time)
         mServing = findViewById(R.id.recipe_det_serve)
         mSource = findViewById(R.id.source_name)
@@ -84,6 +86,7 @@ class RecipeDetailActivity : AppCompatActivity() {
 
                 override fun onFailure(call: Call<RecipeInfo>, t: Throwable) {
                     showUnsuccessfulMessage()
+                    hideProgressBar()
                 }
             }
         )
@@ -103,10 +106,19 @@ class RecipeDetailActivity : AppCompatActivity() {
     private fun setUpRecipeDetail(id : Int, recipe : RecipeInfo) {
 
         if (id == recipe.id) {
-            mInstruction.text = recipe.instructions
+
+            formatInstruction(recipe.instructions)
+
+            Log.i("instruct", recipe.instructions)
             mServing.text = recipe.servings.toString()
             mReady.text = recipe.readyInMinutes.toString() + " mins"
-            mSource.text = "Source : " + recipe.sourceName
+
+            if (recipe.sourceName != null) {
+                mSource.text = "Source : " + recipe.sourceName
+            }
+            else{
+                mSource.text = "Source : visit the website"
+            }
 
             val webLink: String = recipe.sourceUrl
 
@@ -117,6 +129,42 @@ class RecipeDetailActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun formatInstruction(instructions : String){
+
+        val tags = listOf("<ol>", "</ol>", "<li>", "</li>", "</ol>")
+
+        var newInst = ""
+
+        for (i in tags.indices) {
+            if (instructions.contains(tags[i])) {
+                val newInst1: String = instructions.replace(tags[0], "")
+                val newInst2: String = newInst1.replace(tags[1], "")
+                val newInst3: String = newInst2.replace(tags[2], "")
+                newInst = newInst3.replace(tags[3], "")
+            }
+        }
+
+        val finalString : String = newInst.replace(".", ",")
+
+        val arrSplit = finalString.split(",").toTypedArray()
+
+
+        for (k in arrSplit.indices) {
+            setUpInstructions(arrSplit)
+        }
+
+
+    }
+
+    private fun setUpInstructions(instruct: Array<String>)  {
+
+        val recycler : RecyclerView = findViewById(R.id.instruct_recycler)
+
+        recycler.layoutManager = LinearLayoutManager(this)
+        instAdapter = InstructionAdapter(instruct)
+        recycler.adapter = instAdapter
     }
 
     private fun hideProgressBar() {

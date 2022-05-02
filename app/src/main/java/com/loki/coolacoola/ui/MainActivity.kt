@@ -4,14 +4,19 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.loki.coolacoola.R
 import com.loki.coolacoola.adapters.RecipeCategoryAdapter
 import com.loki.coolacoola.adapters.RecipesAdapter
 import com.loki.coolacoola.databinding.ActivityMainBinding
 import com.loki.coolacoola.models.ModelClass
+import com.loki.coolacoola.models.RecipeInfo
 import com.loki.coolacoola.network.ApiUtil
 import retrofit2.Call
 import retrofit2.Callback
@@ -43,7 +48,6 @@ class MainActivity : AppCompatActivity() {
 
         setUpCategory(categories)
 
-        hideProgressBar()
 
         binding.search.setOnClickListener {
             val recipe: String = binding.searchRes.text.toString()
@@ -106,7 +110,33 @@ class MainActivity : AppCompatActivity() {
             recipesAdapter = RecipesAdapter(recipes.results)
             recipesRecycler.adapter = recipesAdapter
 
+          //  val car : CardView = findViewById(R.id.main_card)
+
+            //val position: Int? = recipesAdapter.RecipeViewHolder(car).adapterPosition
+
+            //setUpServingReady(recipes.results[position!!].id)
         }
+    }
+
+    private fun setUpServingReady(id : Int) {
+        ApiUtil.getApiInterface()?.getRecipeDetail(id)?.enqueue(
+            object : Callback<RecipeInfo> {
+                override fun onResponse(call: Call<RecipeInfo>, response: Response<RecipeInfo>) {
+                    if (response.isSuccessful){
+
+                        val serving : TextView = findViewById(R.id.recipe_serving)
+                        val ready : TextView = findViewById(R.id.recipe_ready)
+
+                        serving.text = response.body()!!.servings.toString()
+                        ready.text = response.body()!!.readyInMinutes.toString()
+                    }
+                }
+
+                override fun onFailure(call: Call<RecipeInfo>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+            }
+        )
     }
 
     private fun hideProgressBar() {

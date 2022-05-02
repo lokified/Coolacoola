@@ -16,12 +16,17 @@ class RecipesAdapter(
     val recipes: List<Results>
 ) : RecyclerView.Adapter<RecipesAdapter.RecipeViewHolder>()  {
 
+    var cardPosition : Int = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
         return RecipeViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.recipe_item_layout, parent, false))
     }
 
     override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
+
+        val newCardPosition : Int = holder.adapterPosition
+
+        cardPosition = newCardPosition
 
         val imageUri : String = recipes[position].image
 

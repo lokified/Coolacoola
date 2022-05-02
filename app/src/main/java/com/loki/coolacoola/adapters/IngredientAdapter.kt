@@ -29,7 +29,7 @@ class IngredientAdapter(
             holder.name.text = this.name
             holder.original.text = this.original
 
-            Picasso.get().load("https://spoonacular.com/recipeImages/" + this.image).into(holder.image)
+            Picasso.get().load("https://spoonacular.com/cdn/ingredients_100x100/" + this.image).into(holder.image)
         }
     }
 

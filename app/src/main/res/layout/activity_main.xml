@@ -104,31 +104,40 @@
         android:textColor="@color/white"
         android:textSize="18sp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recipe_recycler"
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txt_dish"
-        android:layout_marginTop="8dp"
-        android:visibility="gone"/>
+        android:layout_height="match_parent"
+        android:layout_below="@id/txt_dish">
 
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_below="@+id/txt_dish"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#D1BDE6"
-        android:layout_marginTop="8dp"
-        android:layout_centerHorizontal="true"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recipe_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/txt_search"
-        android:text="searching..."
-        android:textSize="16sp"
-        android:textColor="#D1BDE6"
-        android:layout_below="@id/progress_bar"
-        android:layout_centerHorizontal="true"/>
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#D1BDE6"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt_search"
+            android:text="searching..."
+            android:textSize="14sp"
+            android:textColor="#D1BDE6"
+            android:layout_below="@id/progress_bar"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"/>
+    </RelativeLayout>
+
 
 </RelativeLayout>

@@ -12,7 +12,7 @@ object ApiUtil {
     private var retrofit : Retrofit? = null
 
     var BASE_URL = "https://api.spoonacular.com/"
-    var API_KEY = "57ed17b0cc824705b553d2c74313e9dc"
+    var API_KEY = "7da0a452d87d470683c95d99b8a96dd0"
 
 
     fun getApiInterface() : ApiInterface? {

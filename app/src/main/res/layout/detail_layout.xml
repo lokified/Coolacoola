@@ -105,13 +105,12 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:padding="5dp"
                 android:layout_below="@+id/txt_2"
-                android:id="@+id/ingredientsRecycler"
-                tools:listitem="@layout/ingredient_item_layout"/>
+                android:id="@+id/ingredientsRecycler"/>
 
         </RelativeLayout>
 
@@ -131,11 +130,37 @@
             android:layout_height="wrap_content"
             android:id="@+id/recipe_det_instr"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
+            android:layout_marginBottom="8dp"
             android:text="instructions"
             android:textColor="@color/white"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/source_name"
+            android:text="Source"
+            android:textColor="@color/white"
+            android:layout_marginStart="16dp"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/source_link"
+            android:text="Visit site"
+            android:background="@drawable/et_bg"
+            android:padding="3dp"
+            android:textColor="@color/white"
+            android:textStyle="italic"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:textSize="14sp"
+            android:drawableRight="@drawable/ic_visit"
+            android:drawablePadding="5dp"/>
 
     </LinearLayout>
 

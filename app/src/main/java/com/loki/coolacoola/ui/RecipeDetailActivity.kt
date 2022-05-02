@@ -1,6 +1,7 @@
 package com.loki.coolacoola.ui
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -28,6 +29,8 @@ class RecipeDetailActivity : AppCompatActivity() {
     private lateinit var mInstruction : TextView
     private lateinit var mReady : TextView
     private lateinit var mServing : TextView
+    private lateinit var mSource : TextView
+    private lateinit var mSourceLink : TextView
 
     private lateinit var mLayout : RelativeLayout
     private lateinit var mProgress : ProgressBar
@@ -43,6 +46,8 @@ class RecipeDetailActivity : AppCompatActivity() {
         mInstruction = findViewById(R.id.recipe_det_instr)
         mReady = findViewById(R.id.recipe_det_time)
         mServing = findViewById(R.id.recipe_det_serve)
+        mSource = findViewById(R.id.source_name)
+        mSourceLink = findViewById(R.id.source_link)
 
         mLayout = findViewById(R.id.ing_layout)
         mProgress = findViewById(R.id.detail_progress)
@@ -101,6 +106,16 @@ class RecipeDetailActivity : AppCompatActivity() {
             mInstruction.text = recipe.instructions
             mServing.text = recipe.servings.toString()
             mReady.text = recipe.readyInMinutes.toString() + " mins"
+            mSource.text = "Source : " + recipe.sourceName
+
+            val webLink: String = recipe.sourceUrl
+
+            mSourceLink.setOnClickListener {
+
+                Intent(Intent.ACTION_VIEW, Uri.parse(webLink)).also {
+                    startActivity(it)
+                }
+            }
         }
     }
 

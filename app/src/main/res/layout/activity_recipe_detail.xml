@@ -51,9 +51,27 @@
             android:layout_marginTop="-20dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <include layout="@layout/detail_layout"/>
+            <include layout="@layout/detail_layout"
+                android:id="@+id/ing_layout"
+                android:visibility="gone"/>
 
         </androidx.core.widget.NestedScrollView>
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/detail_progress"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sorry, something went wrong"
+            android:id="@+id/err_msg"
+            android:textSize="14sp"
+            android:textColor="#D1BDE6"
+            android:layout_gravity="center"
+            android:visibility="gone"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

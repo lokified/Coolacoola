@@ -3,7 +3,10 @@ package com.loki.coolacoola.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
+import android.widget.ProgressBar
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -26,6 +29,10 @@ class RecipeDetailActivity : AppCompatActivity() {
     private lateinit var mReady : TextView
     private lateinit var mServing : TextView
 
+    private lateinit var mLayout : RelativeLayout
+    private lateinit var mProgress : ProgressBar
+    private lateinit var mError : TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recipe_detail)
@@ -36,6 +43,10 @@ class RecipeDetailActivity : AppCompatActivity() {
         mInstruction = findViewById(R.id.recipe_det_instr)
         mReady = findViewById(R.id.recipe_det_time)
         mServing = findViewById(R.id.recipe_det_serve)
+
+        mLayout = findViewById(R.id.ing_layout)
+        mProgress = findViewById(R.id.detail_progress)
+        mError = findViewById(R.id.err_msg)
 
         val intent : Intent = intent
 
@@ -58,14 +69,16 @@ class RecipeDetailActivity : AppCompatActivity() {
             object : Callback<RecipeInfo> {
                 override fun onResponse(call: Call<RecipeInfo>, response: Response<RecipeInfo>) {
                     if (response.isSuccessful){
-
                         setUpRecipeDetail(id, response.body()!!)
                         setUpIngredient(response.body()!!.extendedIngredients)
+
+                        showDetails()
+                        hideProgressBar()
                     }
                 }
 
                 override fun onFailure(call: Call<RecipeInfo>, t: Throwable) {
-                    TODO("Not yet implemented")
+                    showUnsuccessfulMessage()
                 }
             }
         )
@@ -89,5 +102,17 @@ class RecipeDetailActivity : AppCompatActivity() {
             mServing.text = recipe.servings.toString()
             mReady.text = recipe.readyInMinutes.toString() + " mins"
         }
+    }
+
+    private fun hideProgressBar() {
+        mProgress.visibility = View.GONE
+    }
+
+    private fun showDetails() {
+        mLayout.visibility = View.VISIBLE
+    }
+
+    private fun showUnsuccessfulMessage(){
+        mError.visibility = View.VISIBLE
     }
 }

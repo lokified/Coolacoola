@@ -34,10 +34,13 @@ class RecipeDetailActivity : AppCompatActivity() {
     private lateinit var mServing : TextView
     private lateinit var mSource : TextView
     private lateinit var mSourceLink : TextView
+    private lateinit var mInstruction : TextView
 
     private lateinit var mLayout : RelativeLayout
     private lateinit var mProgress : ProgressBar
     private lateinit var mError : TextView
+
+    private var isToFormat: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +53,7 @@ class RecipeDetailActivity : AppCompatActivity() {
         mServing = findViewById(R.id.recipe_det_serve)
         mSource = findViewById(R.id.source_name)
         mSourceLink = findViewById(R.id.source_link)
+        mInstruction = findViewById(R.id.instruction)
 
         mLayout = findViewById(R.id.ing_layout)
         mProgress = findViewById(R.id.detail_progress)
@@ -107,7 +111,13 @@ class RecipeDetailActivity : AppCompatActivity() {
 
         if (id == recipe.id) {
 
-            formatInstruction(recipe.instructions)
+            if (isToFormat) {
+                formatInstruction(recipe.instructions)
+                mInstruction.visibility = View.GONE
+            }
+            else {
+                mInstruction.text = recipe.instructions
+            }
 
             Log.i("instruct", recipe.instructions)
             mServing.text = recipe.servings.toString()
@@ -133,6 +143,8 @@ class RecipeDetailActivity : AppCompatActivity() {
 
     private fun formatInstruction(instructions : String){
 
+        isToFormat
+
         val tags = listOf("<ol>", "</ol>", "<li>", "</li>", "</ol>")
 
         var newInst = ""
@@ -143,19 +155,17 @@ class RecipeDetailActivity : AppCompatActivity() {
                 val newInst2: String = newInst1.replace(tags[1], "")
                 val newInst3: String = newInst2.replace(tags[2], "")
                 newInst = newInst3.replace(tags[3], "")
+
+                val finalString : String = newInst.replace(".", ",")
+
+                val arrSplit = finalString.split(",").toTypedArray()
+
+
+                for (k in arrSplit.indices) {
+                    setUpInstructions(arrSplit)
+                }
             }
         }
-
-        val finalString : String = newInst.replace(".", ",")
-
-        val arrSplit = finalString.split(",").toTypedArray()
-
-
-        for (k in arrSplit.indices) {
-            setUpInstructions(arrSplit)
-        }
-
-
     }
 
     private fun setUpInstructions(instruct: Array<String>)  {

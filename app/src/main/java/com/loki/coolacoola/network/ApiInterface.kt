@@ -9,7 +9,7 @@ import retrofit2.http.Query
 
 interface ApiInterface {
 
-    @GET("recipes/complexSearch?&number=6&")
+    @GET("recipes/complexSearch?&number=100&")
     fun getRecipeData (
         @Query("query") query: String
     ): Call<ModelClass>

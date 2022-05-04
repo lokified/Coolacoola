@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "294729472120",
+    "project_id": "coolacoola-3b7ae",
+    "storage_bucket": "coolacoola-3b7ae.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:294729472120:android:c4b5a22f6a174ace9a758d",
+        "android_client_info": {
+          "package_name": "com.loki.coolacoola"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "294729472120-697236h7s0bnfp41cmkjo1rdkicaa4b2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWw33SRuNvRx6VAvDKEPbJufrTzG3u5xk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "294729472120-697236h7s0bnfp41cmkjo1rdkicaa4b2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

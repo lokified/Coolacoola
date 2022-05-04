@@ -7,6 +7,16 @@
     android:background="@color/main_theme"
     tools:context=".ui.LoginActivity">
 
+    <ProgressBar
+        android:id="@+id/login_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/signup_btn"
         android:layout_width="250dp"
@@ -42,7 +52,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:textColorHint="#8F7ED8"
-        android:hint="Email"
         android:scrollbarSize="25dp"
         android:background="@drawable/et_bg"
         android:padding="1dp"
@@ -54,6 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/et_email"
+            android:hint="email"
             android:inputType="textEmailAddress"
             android:textColor="@color/white"
             android:padding="18dp"

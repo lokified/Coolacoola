@@ -1,16 +1,23 @@
 package com.loki.coolacoola.ui
 
+import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
+import android.widget.PopupMenu
 import android.widget.TextView
+import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.loki.coolacoola.R
 import com.loki.coolacoola.adapters.RecipeCategoryAdapter
 import com.loki.coolacoola.adapters.RecipesAdapter
@@ -40,6 +47,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val userName : String = FirebaseAuth.getInstance().currentUser?.displayName.toString()
+        binding.userName.text = userName
+
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         mEditor = sharedPreferences.edit()
 
@@ -60,7 +70,48 @@ class MainActivity : AppCompatActivity() {
 
         fetchRecipeData(mSearchTerm)
 
+        //show popup menu
+        binding.userAcc.setOnClickListener {
+
+            showPopUpMenu(it as ImageView)
+        }
+
     }
+
+    private fun showPopUpMenu(imageView: ImageView) {
+        val popupMenu = PopupMenu(this, imageView)
+        popupMenu.inflate(R.menu.user_menu)
+        popupMenu.setOnMenuItemClickListener {
+            val itemId: Int = it.itemId
+
+            if (itemId == R.id.account) {
+
+                Intent(this, UserAccount::class.java).also { intent ->
+                    startActivity(intent)
+                }
+            }
+
+            if (itemId == R.id.logout) {
+                logOut()
+            }
+
+            return@setOnMenuItemClickListener true
+        }
+        popupMenu.show()
+
+    }
+
+    private fun logOut() {
+        FirebaseAuth.getInstance().signOut()
+
+        Intent(this, LoginActivity::class.java).also {
+            it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            startActivity(it)
+            finish()
+            Toast.makeText(this, "logged out", Toast.LENGTH_LONG).show()
+        }
+    }
+
 
     private fun setUpCategory(category : List<String>) {
         categoryRecycler = binding.foodCatRecycler
@@ -80,7 +131,7 @@ class MainActivity : AppCompatActivity() {
                     hideProgressBar()
 
                     if (response.isSuccessful) {
-                        setData(response.body())
+                        setUpRecipes(response.body())
 
                         showRecipes()
                     }
@@ -100,7 +151,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun setData(recipes : ModelClass?) {
+    private fun setUpRecipes(recipes : ModelClass?) {
 
         if (recipes != null) {
 

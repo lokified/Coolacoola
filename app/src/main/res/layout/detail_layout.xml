@@ -140,8 +140,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/instruct_recycler"
-            android:layout_margin="8dp"
-            tools:listitem="@layout/instruction_item_layout"/>
+            android:layout_margin="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/instruction"
+            android:text="insructions"
+            android:textColor="@color/white"
+            android:layout_marginStart="16dp"
+            android:textSize="14sp"/>
 
         <TextView
             android:layout_width="wrap_content"

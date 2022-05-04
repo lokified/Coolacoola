@@ -25,7 +25,9 @@ The application uses the spoonacular api to show the recipes of different type o
 * Spoonacular Api.
 * XML.
 * Retrofit
-
+## Demo
+### splash screen
+![splash screen](https://user-images.githubusercontent.com/splash.png)
 ## Repo link
 *  'https://github.com/lokified/Coolacoola'
 

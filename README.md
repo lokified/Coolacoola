@@ -26,11 +26,11 @@ The application uses the spoonacular api to show the recipes of different type o
 * XML.
 * Retrofit
 ## Demo
-### screenshot
-![splash](https://user-images.githubusercontent.com/87479198/166692695-a360305a-cd91-40df-a99e-b194ec732305.png)
-![login](https://user-images.githubusercontent.com/87479198/166692887-11e9dccd-b54e-468a-9719-2b4bb9533bdb.png)
-![signin](https://user-images.githubusercontent.com/87479198/166692923-c685764f-101c-4ef8-a6fb-6ad69376cb39.png)
-![recipe](https://user-images.githubusercontent.com/87479198/166692943-20ba8239-acf2-4b9f-bfd7-78c346835e3c.png)
+### screenshots
+<img src="https://user-images.githubusercontent.com/87479198/166692695-a360305a-cd91-40df-a99e-b194ec732305.png" width=30% height=30% >
+<img src="https://user-images.githubusercontent.com/87479198/166692887-11e9dccd-b54e-468a-9719-2b4bb9533bdb.png" width=30% height=30% >
+<img src="https://user-images.githubusercontent.com/87479198/166692923-c685764f-101c-4ef8-a6fb-6ad69376cb39.png" width=30% height=30% >
+<img src="https://user-images.githubusercontent.com/87479198/166692943-20ba8239-acf2-4b9f-bfd7-78c346835e3c.png" width=30% height=30% >
 
 ## Repo link
 *  'https://github.com/lokified/Coolacoola'

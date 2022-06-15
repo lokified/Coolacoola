@@ -6,6 +6,10 @@ This a food application that allows one to search for recipes
 ## Description
 The application uses the spoonacular api to show the recipes of different type of foods. You can search by the name of food, ingredients or nutrition.
 
+## Upcoming update
+1. MVVM architecture implementation
+2. Material design with animations
+
 ## Prerequisites
 1. Java jdk
 2. Androidstudio.

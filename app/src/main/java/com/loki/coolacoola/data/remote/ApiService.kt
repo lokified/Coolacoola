@@ -1,13 +1,13 @@
-package com.loki.coolacoola.network
+package com.loki.coolacoola.data.remote
 
-import com.loki.coolacoola.models.ModelClass
-import com.loki.coolacoola.models.RecipeInfo
+import com.loki.coolacoola.data.models.ModelClass
+import com.loki.coolacoola.data.models.RecipeInfo
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface ApiInterface {
+interface ApiService {
 
     @GET("recipes/complexSearch?&number=100&")
     fun getRecipeData (

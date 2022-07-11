@@ -1,4 +1,4 @@
-package com.loki.coolacoola.models
+package com.loki.coolacoola.data.models
 
 import com.google.gson.annotations.SerializedName
 

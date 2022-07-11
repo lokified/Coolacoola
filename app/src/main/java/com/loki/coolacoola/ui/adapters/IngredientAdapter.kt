@@ -1,4 +1,4 @@
-package com.loki.coolacoola.adapters
+package com.loki.coolacoola.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,8 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.loki.coolacoola.R
-import com.loki.coolacoola.models.Ingredients
-import com.squareup.picasso.Picasso
+import com.loki.coolacoola.data.models.Ingredients
 
 class IngredientAdapter(
     val ingredient : List<Ingredients>
@@ -29,7 +28,7 @@ class IngredientAdapter(
             holder.name.text = this.name
             holder.original.text = this.original
 
-            Picasso.get().load("https://spoonacular.com/cdn/ingredients_100x100/" + this.image).into(holder.image)
+            //Picasso.get().load("https://spoonacular.com/cdn/ingredients_100x100/" + this.image).into(holder.image)
         }
     }
 

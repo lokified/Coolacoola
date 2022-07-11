@@ -1,4 +1,4 @@
-package com.loki.coolacoola.adapters
+package com.loki.coolacoola.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.loki.coolacoola.R
-import com.loki.coolacoola.models.Food
+import com.loki.coolacoola.data.models.Food
 
 class FoodAdapter(
     val food: Array<Food>

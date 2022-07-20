@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="270dp"
+    android:layout_height="300dp"
     android:id="@+id/main_card"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="10dp"
@@ -17,7 +17,7 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="190dp"
             android:id="@+id/recipe_img"
             tools:src="@tools:sample/avatars[2]"
             android:scaleType="centerCrop"/>
@@ -28,6 +28,7 @@
             android:id="@+id/recipe_title"
             android:text="Pasta with Garlic, Scallions, Cauliflower and Breadcrumbs"
             android:gravity="center"
+            android:singleLine="true"
             android:layout_margin="8dp"
             android:textColor="@color/white"/>
 

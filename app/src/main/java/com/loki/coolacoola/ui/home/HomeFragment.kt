@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.PopupMenu
 import androidx.lifecycle.Observer
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
@@ -18,6 +19,7 @@ import com.loki.coolacoola.databinding.FragmentHomeBinding
 import com.loki.coolacoola.ui.adapters.RecipeCategoryAdapter
 import com.loki.coolacoola.ui.adapters.RecipesAdapter
 import com.loki.coolacoola.util.EventObserver
+import com.loki.coolacoola.util.Status
 import com.loki.coolacoola.util.extension.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -39,6 +41,9 @@ class HomeFragment : Fragment() {
             viewModel
         }
 
+        val userName = FirebaseAuth.getInstance().currentUser?.displayName.toString()
+        binding.userName.text = userName
+
         setUpCategory()
         setUpRecipes()
 
@@ -48,8 +53,6 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val userName : String = FirebaseAuth.getInstance().currentUser?.displayName.toString()
-        binding.userName.text = userName
 
         setUpObserver()
 
@@ -77,8 +80,8 @@ class HomeFragment : Fragment() {
         viewModel.recipeList.observe(viewLifecycleOwner, Observer {
 
             recipesAdapter.setRecipeList(it)
-
         })
+
 
         viewModel.errorToast.observe(viewLifecycleOwner, EventObserver {
 
@@ -90,7 +93,7 @@ class HomeFragment : Fragment() {
 
         binding.apply {
 
-            recipeRecycler.layoutManager = GridLayoutManager(context, 2)
+            recipeRecycler.layoutManager = GridLayoutManager(context, 1)
             recipeRecycler.adapter = recipesAdapter
         }
 
@@ -101,16 +104,11 @@ class HomeFragment : Fragment() {
         val popupMenu = PopupMenu(context, imageView)
         popupMenu.inflate(R.menu.user_menu)
         popupMenu.setOnMenuItemClickListener {
-            val itemId: Int = it.itemId
-
-            if (itemId == R.id.account) {
-
-                //navigate to user account fragment
-
-            }
-
-            if (itemId == R.id.logout) {
-                logOut()
+            
+            when(it.itemId) {
+                
+                R.id.account -> {}
+                R.id.logout -> logOut()
             }
 
             return@setOnMenuItemClickListener true
@@ -123,6 +121,8 @@ class HomeFragment : Fragment() {
         FirebaseAuth.getInstance().signOut()
 
         //navigate to login
+        val action = HomeFragmentDirections.actionHomeFragmentToLoginFragment()
+        findNavController().navigate(action)
     }
 
 }

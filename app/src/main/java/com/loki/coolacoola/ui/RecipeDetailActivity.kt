@@ -13,15 +13,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.loki.coolacoola.R
-import com.loki.coolacoola.adapters.IngredientAdapter
-import com.loki.coolacoola.adapters.InstructionAdapter
-import com.loki.coolacoola.models.Ingredients
-import com.loki.coolacoola.models.RecipeInfo
-import com.loki.coolacoola.network.ApiUtil
-import com.squareup.picasso.Picasso
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.loki.coolacoola.ui.adapters.IngredientAdapter
+import com.loki.coolacoola.ui.adapters.InstructionAdapter
+import com.loki.coolacoola.data.models.Ingredients
+import com.loki.coolacoola.data.models.RecipeDetail
 
 class RecipeDetailActivity : AppCompatActivity() {
 
@@ -66,35 +61,35 @@ class RecipeDetailActivity : AppCompatActivity() {
         val id : Int = intent.getIntExtra("id", 0)
 
 
-        Picasso.get().load(image).into(mImage)
+        //Picasso.get().load(image).into(mImage)
         mTitle.text = title
 
-        fetchRecipeDetail(id)
+        //fetchRecipeDetail(id)
 
     }
 
 
-    private fun fetchRecipeDetail( id : Int) {
-
-        ApiUtil.getApiInterface()?.getRecipeDetail(id)?.enqueue(
-            object : Callback<RecipeInfo> {
-                override fun onResponse(call: Call<RecipeInfo>, response: Response<RecipeInfo>) {
-                    if (response.isSuccessful){
-                        setUpRecipeDetail(id, response.body()!!)
-                        setUpIngredient(response.body()!!.extendedIngredients)
-
-                        showDetails()
-                        hideProgressBar()
-                    }
-                }
-
-                override fun onFailure(call: Call<RecipeInfo>, t: Throwable) {
-                    showUnsuccessfulMessage()
-                    hideProgressBar()
-                }
-            }
-        )
-    }
+//    private fun fetchRecipeDetail( id : Int) {
+//
+//        ApiUtil.getApiInterface()?.getRecipeDetail(id)?.enqueue(
+//            object : Callback<RecipeInfo> {
+//                override fun onResponse(call: Call<RecipeInfo>, response: Response<RecipeInfo>) {
+//                    if (response.isSuccessful){
+//                        setUpRecipeDetail(id, response.body()!!)
+//                        setUpIngredient(response.body()!!.extendedIngredients)
+//
+//                        showDetails()
+//                        hideProgressBar()
+//                    }
+//                }
+//
+//                override fun onFailure(call: Call<RecipeInfo>, t: Throwable) {
+//                    showUnsuccessfulMessage()
+//                    hideProgressBar()
+//                }
+//            }
+//        )
+//    }
 
 
     private fun setUpIngredient(ingredient : List<Ingredients>) {
@@ -107,7 +102,7 @@ class RecipeDetailActivity : AppCompatActivity() {
         ingredientRecycler.adapter = ingredientAdapter
     }
 
-    private fun setUpRecipeDetail(id : Int, recipe : RecipeInfo) {
+    private fun setUpRecipeDetail(id : Int, recipe : RecipeDetail) {
 
         if (id == recipe.id) {
 

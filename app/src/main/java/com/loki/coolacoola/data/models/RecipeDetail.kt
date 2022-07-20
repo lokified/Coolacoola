@@ -2,7 +2,7 @@ package com.loki.coolacoola.data.models
 
 import com.google.gson.annotations.SerializedName
 
-data class RecipeInfo (
+data class RecipeDetail (
 
     @SerializedName("id") val id : Int,
     @SerializedName("title") val title : String,

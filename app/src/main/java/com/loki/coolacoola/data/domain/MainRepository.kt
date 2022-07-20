@@ -1,37 +1,52 @@
 package com.loki.coolacoola.data.domain
 
 import androidx.lifecycle.MutableLiveData
-import com.loki.coolacoola.data.models.ModelClass
-import com.loki.coolacoola.data.models.RecipeInfo
-import com.loki.coolacoola.data.models.Results
+import com.loki.coolacoola.data.models.Random
+import com.loki.coolacoola.data.models.Recipes
 import com.loki.coolacoola.data.remote.ApiService
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.loki.coolacoola.util.extension.onException
+import com.loki.coolacoola.util.extension.onFailure
+import com.loki.coolacoola.util.extension.onSuccess
+import com.loki.coolacoola.util.extension.request
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class MainRepository @Inject constructor(
     private val apiService: ApiService
 ) {
 
-    fun getRecipes(query: String, recipeList: MutableLiveData<List<Results>>, errorText: (String) -> Unit) {
+     fun getRecipes(
+         query: String,
+         recipeList: MutableLiveData<List<Recipes>>,
+         errorText: (String) -> Unit) {
 
         val call = apiService.getRecipeData(query)
 
-        call.enqueue(object: Callback<ModelClass> {
-            override fun onResponse(call: Call<ModelClass>, response: Response<ModelClass>) {
+        call.request { response ->
 
-                if(response.isSuccessful) {
-                    recipeList.postValue(response.body()?.results)
-                }
-                else {
-                    errorText("something went wrong")
-                }
-            }
+            response.onSuccess { data?.let {
+                recipeList.postValue(it.results)
+            } }
+            response.onFailure { message?.let { errorText(it) } }
+            response.onException { message?.let { errorText(it)} }
+        }
+    }
 
-            override fun onFailure(call: Call<ModelClass>, t: Throwable) {
-                errorText(t.localizedMessage!!)
-            }
-        })
+    fun getRandomRecipes(
+        recipeList: MutableLiveData<List<Random>>,
+        errorText: (String) -> Unit
+    ) {
+
+        val call = apiService.getRandomRecipes()
+
+        call.request { response ->
+
+            response.onSuccess { data?.let {
+                recipeList.postValue(it.recipes)
+            } }
+            response.onFailure { message?.let { errorText(it) } }
+            response.onException { message?.let { errorText(it)} }
+        }
     }
 }

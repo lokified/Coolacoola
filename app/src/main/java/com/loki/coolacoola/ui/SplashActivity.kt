@@ -29,11 +29,11 @@ class SplashActivity : AppCompatActivity() {
         val handler: Handler = Handler()
         handler.postDelayed( Runnable {
 
-            Intent(this, LoginActivity::class.java).also {
+            Intent(this, MainActivity::class.java).also {
                 startActivity(it)
                 finish()
             }
-        }, 5000
+        }, 2000
         )
 
     }
